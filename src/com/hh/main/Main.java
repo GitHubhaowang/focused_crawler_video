@@ -2,16 +2,21 @@ package com.hh.main;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.hh.collection.URLCollection;
 import com.hh.config.ReadXML;
+import com.hh.config.WriteXML;
 import com.hh.entity.URLEntity;
 import com.hh.sprider.WebSprider;
+import com.hh.util.XMLFileUtil;
 
 public class Main {
 	public static void main(String[] args) {
-		ReadXML.init();
+		XMLFileUtil.readXml();
 		
 		WebSprider ws = new WebSprider();
 		ws.crawling();
+		
+		XMLFileUtil.writeXml(URLCollection.getInstance());
 		
 		Set<URLEntity> set = ws.getUrlC().getVisiteds();
 		Iterator<URLEntity> iter = set.iterator();
