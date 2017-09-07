@@ -3,8 +3,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 import com.hh.collection.URLCollection;
-import com.hh.config.ReadXML;
-import com.hh.config.WriteXML;
 import com.hh.entity.URLEntity;
 import com.hh.sprider.WebSprider;
 import com.hh.util.XMLFileUtil;
@@ -18,7 +16,7 @@ public class Main {
 		
 		XMLFileUtil.writeXml(URLCollection.getInstance());
 		
-		Set<URLEntity> set = ws.getUrlC().getVisiteds();
+		Set<URLEntity> set = URLCollection.getInstance().getVisiteds();
 		Iterator<URLEntity> iter = set.iterator();
 		while (iter.hasNext()) {
 			System.out.println("1");

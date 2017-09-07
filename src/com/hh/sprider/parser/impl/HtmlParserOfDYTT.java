@@ -49,12 +49,16 @@ public class HtmlParserOfDYTT implements HtmlParser{
 	}
 
 	@Override
-	public URLEntity getDownUrl(URLEntity ue, String url,int level) {
+	public URLEntity getDownUrl(URLEntity ue) {
 		System.out.println(ue.getName());
 		Map<String, Object> map = null;
-		if (level == 0) {
-			map = getStartMap(ue.getName());
-		}
+		map = getStartMap(ue.getName());
+		
+		return getDownUrl(map, ue, "http://s.dydytt.net/plus/search.php", 1);
+	}
+	
+	private URLEntity getDownUrl(Map<String, Object> map, URLEntity ue, String url,int level) {
+		
 		String page = getBody(map, "gb2312", url);
 		if ("".equals(page)) {
 			System.out.println("没有找到");
@@ -76,7 +80,7 @@ public class HtmlParserOfDYTT implements HtmlParser{
 		if ("".equals(newUrl)) {
 			return ue;
 		}
-		return getDownUrl(ue, newUrl, level+1);
+		return getDownUrl(null, ue, newUrl, level+1);
 	}
 	
 	@Override

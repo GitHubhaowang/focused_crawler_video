@@ -39,7 +39,7 @@ public interface HtmlParser {
 	 * @param level 层级
 	 * @return
 	 */
-	public URLEntity getDownUrl(URLEntity ue, String url, int level);
+	public URLEntity getDownUrl(URLEntity ue);
 	
 	/**
 	 * 从下载页面上获取下载连接
