@@ -1,4 +1,4 @@
-package com.hh.parser.impl;
+package com.hh.sprider.parser.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.hh.entity.URLEntity;
-import com.hh.parser.HtmlParser;
+import com.hh.sprider.parser.HtmlParser;
 import com.hh.util.HttpClientUtil;
 
 /**

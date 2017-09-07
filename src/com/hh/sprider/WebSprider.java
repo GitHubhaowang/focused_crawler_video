@@ -7,8 +7,8 @@ import java.util.Set;
 
 import com.hh.collection.URLCollection;
 import com.hh.entity.URLEntity;
-import com.hh.parser.HtmlParser;
-import com.hh.parser.impl.HtmlParserOfDYTT;
+import com.hh.sprider.parser.HtmlParser;
+import com.hh.sprider.parser.impl.HtmlParserOfDYTT;
 
 /**
  * 爬虫核心类
