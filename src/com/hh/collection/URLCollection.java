@@ -3,8 +3,6 @@ package com.hh.collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.hh.entity.URLEntity;
-
 /**
  * URLEntity存储容器
  * @author hh

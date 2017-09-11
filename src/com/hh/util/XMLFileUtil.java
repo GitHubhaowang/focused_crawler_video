@@ -16,7 +16,7 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 import com.hh.collection.URLCollection;
-import com.hh.entity.URLEntity;
+import com.hh.collection.URLEntity;
 
 /**
  * xml文件的读取和写入

@@ -1,7 +1,7 @@
 package com.hh.sprider;
 
 import com.hh.collection.URLCollection;
-import com.hh.entity.URLEntity;
+import com.hh.collection.URLEntity;
 import com.hh.sprider.parser.HtmlParser;
 import com.hh.sprider.parser.impl.HtmlParserOfDYTT;
 

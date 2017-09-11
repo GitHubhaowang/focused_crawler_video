@@ -2,7 +2,7 @@ package com.hh.sprider.parser;
 
 import java.util.Map;
 
-import com.hh.entity.URLEntity;
+import com.hh.collection.URLEntity;
 
 /**
  * 页面解析类

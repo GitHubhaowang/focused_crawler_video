@@ -1,4 +1,4 @@
-package com.hh.entity;
+package com.hh.collection;
 
 /**
  * 资源实体类

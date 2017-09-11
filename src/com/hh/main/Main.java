@@ -3,7 +3,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import com.hh.collection.URLCollection;
-import com.hh.entity.URLEntity;
+import com.hh.collection.URLEntity;
 import com.hh.sprider.WebSprider;
 import com.hh.util.XMLFileUtil;
 
