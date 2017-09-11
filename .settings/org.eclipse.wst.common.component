@@ -3,6 +3,8 @@
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/data"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/thunder"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <property name="java-output-path" value="/focused_crawler_video/build/classes"/>
         <property name="context-root" value="focused_crawler_video"/>
     </wb-module>
