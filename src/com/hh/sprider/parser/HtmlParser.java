@@ -35,8 +35,6 @@ public interface HtmlParser {
 	/**
 	 * 获取下载链接
 	 * @param ue
-	 * @param url
-	 * @param level 层级
 	 * @return
 	 */
 	public URLEntity getDownUrl(URLEntity ue);
