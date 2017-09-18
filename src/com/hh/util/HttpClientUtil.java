@@ -19,13 +19,13 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 public class HttpClientUtil extends AbstractHttpClientUtil{
-	private HttpClientUtil instance = null;
+	private static HttpClientUtil instance = null;
 	
 	private HttpClientUtil() {
 		init();
 	}
 	
-	public synchronized HttpClientUtil getInstance() {
+	public synchronized static HttpClientUtil getInstance() {
 		if (instance == null) {
 			instance = new HttpClientUtil();
 		}
