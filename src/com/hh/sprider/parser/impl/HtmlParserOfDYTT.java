@@ -20,12 +20,10 @@ public class HtmlParserOfDYTT implements HtmlParser{
 	public String getBody(Map<String, Object> map, String charaset, String url) {
 		if (map != null) {
 			map.put("kwtype", "0");
-			return HttpClientUtil.getSend(map, charaset, url);
+			return HttpClientUtil.getInstance().getSend(map, charaset, url);
 		} else {
-			return HttpClientUtil.getSend(charaset, url);
-		}
-		
-		
+			return HttpClientUtil.getInstance().getSend(charaset, url);
+		}	
     }
 
 	@Override
