@@ -44,61 +44,31 @@ public class HttpClientUtil extends AbstractHttpClientUtil{
 		String page = "";
 		
         CloseableHttpResponse httpResponse = null;
+	    try {
+	    	// 请求条件
+	        if (map != null && !map.isEmpty()) {
+	        	//封装请求参数
+	    		List<NameValuePair> params = new ArrayList<NameValuePair>();
+	    		
+	    		Set<String> set = map.keySet();
+	    		Iterator<String> iter = set.iterator();
+	    		while (iter.hasNext()) {
+	    			String key = iter.next();
+	    			params.add(new BasicNameValuePair(key, (String) map.get(key)));
+	    		}
+	    		String str = "";  
+	    		str = EntityUtils.toString(new UrlEncodedFormEntity(params, charset));
+	
+	        	if (!"".equals(str)) {
+	        		url += str;
+	        	}
+	        }
         
-        //封装请求参数
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		
-		Set<String> set = map.keySet();
-		Iterator<String> iter = set.iterator();
-		while (iter.hasNext()) {
-			String key = iter.next();
-			params.add(new BasicNameValuePair(key, (String) map.get(key)));
-		}
-
-        String str = "";  
-      
-        try {
-        	str = EntityUtils.toString(new UrlEncodedFormEntity(params, charset));
-        	if (!"".equals(str)) {
-        		url += "?"+str;
-        	}
             System.out.println("--GET请求的URL-- " + url);
             //用get方法发送http请求
             HttpGet get = new HttpGet(url);
             //发送get请求
             System.out.println("发送请求");
-            httpResponse = httpClient.execute(get);
-            
-			//response实体
-			HttpEntity entity = httpResponse.getEntity();
-			if (null != entity){
-				page = EntityUtils.toString(entity, charset);
-			}
-        } catch (Exception e) {
-           e.printStackTrace();
-        } finally {
-        	// 关闭连接,释放资源
-        	httpResponseClose(httpResponse);
-        }
-		return page;
-	}
-	
-	/**
-	 * get方式发送请求
-	 * @param charset 字符集
-	 * @param url 地址
-	 * @return
-	 */
-	public synchronized String getSend(String charset, String url) {
-		String page = "";
-		
-        CloseableHttpResponse httpResponse = null;
-        
-        try {
-            System.out.println("--GET请求的URL-- " + url);
-            //用get方法发送http请求
-            HttpGet get = new HttpGet(url);
-            //发送get请求
             httpResponse = httpClient.execute(get);
             
 			//response实体
@@ -129,18 +99,22 @@ public class HttpClientUtil extends AbstractHttpClientUtil{
         try {
             // 创建 Post 连接对象
             HttpPost httpPost = new HttpPost(url);
+            
+            // 请求条件
+            if (map != null || !map.isEmpty()) {
+                // 创建参数队列
+                List<NameValuePair> formparams = new ArrayList<NameValuePair>();
+                Set<String> set = map.keySet();
+        		Iterator<String> iter = set.iterator();
+        		while (iter.hasNext()) {
+        			String key = iter.next();
+        			formparams.add(new BasicNameValuePair(key, (String) map.get(key)));
+        		}
 
-            // 创建参数队列
-            List<NameValuePair> formparams = new ArrayList<NameValuePair>();
-            Set<String> set = map.keySet();
-    		Iterator<String> iter = set.iterator();
-    		while (iter.hasNext()) {
-    			String key = iter.next();
-    			formparams.add(new BasicNameValuePair(key, (String) map.get(key)));
-    		}
+                UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(formparams, charset);
+                httpPost.setEntity(uefEntity);
+            }
 
-            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(formparams, charset);
-            httpPost.setEntity(uefEntity);
             // 连接并得到响应对象
             response = httpClient.execute(httpPost);
 
