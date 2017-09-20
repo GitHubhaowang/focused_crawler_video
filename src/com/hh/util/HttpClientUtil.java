@@ -35,6 +35,7 @@ public class HttpClientUtil extends AbstractHttpClientUtil{
 	
 	/**
 	 * get方式发送请求
+	 * 
 	 * @param map 参数
 	 * @param charset 字符集
 	 * @param url 地址

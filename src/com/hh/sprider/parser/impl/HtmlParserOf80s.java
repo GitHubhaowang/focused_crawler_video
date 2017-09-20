@@ -10,30 +10,30 @@ import com.hh.sprider.parser.HtmlParser;
 import com.hh.util.HttpClientUtil;
 
 /**
- * 电影天堂
+ * 80s网站的页面解析
  * @author hh
  *
  */
-public class HtmlParserOfDYTT implements HtmlParser{
+public class HtmlParserOf80s implements HtmlParser{
 
 	@Override
 	public String getBody(Map<String, Object> map, String charaset, String url) {
-		return HttpClientUtil.getInstance().getSend(map, charaset, url);
-    }
+		return HttpClientUtil.getInstance().getPost(map, charaset, url);
+	}
 
 	@Override
 	public String analysisUrl(String page, String name) {
-		Pattern pattern = Pattern.compile("<b><a href=\'(.+?)\'>(.+?)《<font color='red'>"+name+"</font>(.+?)");
+		Pattern pattern = Pattern.compile("<li>\n<a href=\"(.+?)\" target=\"_blank\">\n<i class=\"fa fa-film\"></i>\n[电影]\n"+name+"(.+?)\n</a>");
 		Matcher matcher = pattern.matcher(page);
 		if (matcher.find()) {
-			return "http://www.ygdy8.com" + matcher.group(1);
+			return "http://www.80s.tw" + matcher.group(1);
 		}
 		return "";
 	}
 
 	@Override
 	public boolean isDownPage(String page) {
-		Pattern pattern = Pattern.compile("<title>(.+?)迅雷下载_阳光电影(_电影天堂)?</title>");
+		Pattern pattern = Pattern.compile("<title>(.+?)高清mp4迅雷下载-80s手机电影</title>");
 		Matcher matcher = pattern.matcher(page);
 		if (matcher.find()) {
 			return true;
@@ -43,11 +43,12 @@ public class HtmlParserOfDYTT implements HtmlParser{
 
 	@Override
 	public URLEntity getDownUrl(URLEntity ue) {
+
 		System.out.println(ue.getName());
 		Map<String, Object> map = null;
 		map = getStartMap(ue.getName());
 		
-		return getDownUrl(map, ue, "http://s.dydytt.net/plus/search.php", 1);
+		return getDownUrl(map, ue, "http://www.80s.tw/search", 1);
 	}
 	
 	private URLEntity getDownUrl(Map<String, Object> map, URLEntity ue, String url,int level) {
@@ -65,32 +66,51 @@ public class HtmlParserOfDYTT implements HtmlParser{
 		// 判断是否为下载页面
 		if (isDownPage(page)) {
 			ue.setDownPageURL(url);
-			ue.setDownURL(getDownUrlFromPage(page));
+			ue.setDownURL(getDownUrlFromPage(page, ue.getName()));
 			return ue;
 		}
 		// 解析当前页面
 		String newUrl = analysisUrl(page, ue.getName());
 		if ("".equals(newUrl)) {
+			System.out.println("1");
 			return ue;
 		}
 		return getDownUrl(null, ue, newUrl, level+1);
 	}
-	
+
 	@Override
 	public String getDownUrlFromPage(String page) {
-		Pattern pattern = Pattern.compile("<td style=\"WORD-WRAP: break-word\" bgcolor=\"#fdfddf\"><a href=\"(.+?)\">(.+?)</a></td>");
+		Pattern pattern = Pattern.compile("<a rel=\"nofollow\" href=\"(.+?)\" >");
 		Matcher matcher = pattern.matcher(page);
-		if (matcher.find() &&matcher.groupCount()>=2 && matcher.group(1).equals(matcher.group(2))) {
+		if (matcher.find()) {
 			return matcher.group(1);
 		}
 		return "";
 	}
 	
+	private String getDownUrlFromPage(String page, String name) {
+		Pattern pattern = Pattern.compile("<a rel=\"nofollow\" href=\"(.+?)\" thunderrestitle=\""+ name +"\"");
+		Matcher matcher = pattern.matcher(page);
+		if (matcher.find()) {
+			return matcher.group(1);
+		}
+		return "";
+	}
+
 	@Override
 	public Map<String, Object> getStartMap(String name) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("kwtype", "0");
 		map.put("keyword", name);
 		return map;
+	}
+	
+	
+	public static void main(String[] args) {
+		HtmlParser hp = new HtmlParserOf80s();
+		
+		URLEntity ue = new URLEntity();
+		ue.setName("碟中谍3");
+		
+		System.out.println(hp.getDownUrl(ue));
 	}
 }
