@@ -122,10 +122,10 @@ public class HttpClientUtil extends AbstractHttpClientUtil{
             // 得到响应参数
             HttpEntity entity = response.getEntity();
             if (entity != null) {
-                System.out.println("--------------------------------------");
+//                System.out.println("--------------------------------------");
                 responseStr = EntityUtils.toString(entity, charset);
-                System.out.println("响应内容:\n " + responseStr);
-                System.out.println("--------------------------------------");
+//                System.out.println("响应内容:\n " + responseStr);
+//                System.out.println("--------------------------------------");
             }
 
         } catch (ClientProtocolException e) {
