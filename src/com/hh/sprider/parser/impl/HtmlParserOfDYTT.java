@@ -52,7 +52,7 @@ public class HtmlParserOfDYTT implements HtmlParser{
 	
 	private URLEntity getDownUrl(Map<String, Object> map, URLEntity ue, String url,int level) {
 		
-		String page = getBody(map, "utf-8", url);
+		String page = getBody(map, "gbk", url);
 		if ("".equals(page)) {
 			System.out.println("没有找到");
 			return ue;

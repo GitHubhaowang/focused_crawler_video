@@ -39,10 +39,13 @@ public class WebSpider extends Thread{
 				// 用来防止一直循环下去
 				Integer count = map.get(ue);
 				if (count == null) {
+					System.out.println(ue.getName()+ ":- 0 次查找失败");
 					map.put(ue, 1);
-				} else if (count < 5) {
+				} else if (count < 1) {
+					System.out.println(ue.getName()+ ":- " +count + " 次查找失败");
 					map.put(ue, count+1);
 				} else {
+					
 					continue ;
 				}
 

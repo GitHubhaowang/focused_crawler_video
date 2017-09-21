@@ -61,7 +61,7 @@ public class HttpClientUtil extends AbstractHttpClientUtil{
 	    		str = EntityUtils.toString(new UrlEncodedFormEntity(params, charset));
 	
 	        	if (!"".equals(str)) {
-	        		url += str;
+	        		url += "?"+str;
 	        	}
 	        }
         
@@ -116,6 +116,7 @@ public class HttpClientUtil extends AbstractHttpClientUtil{
                 httpPost.setEntity(uefEntity);
             }
 
+            System.out.println("--POST请求的URL-- " + url);
             // 连接并得到响应对象
             response = httpClient.execute(httpPost);
 

@@ -1,7 +1,5 @@
 package com.hh.main;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import com.hh.collection.URLCollection;
@@ -15,8 +13,8 @@ public class Main {
 	public static void main(String[] args) {
 		XMLFileUtil.readXml();
 		
-		new WebSpider(HtmlParserOfDYTT.class).start();
 		new WebSpider(HtmlParserOf80s.class).start();
+		new WebSpider(HtmlParserOfDYTT.class).crawling();
 		
 		XMLFileUtil.writeXml(URLCollection.getInstance());
 		
