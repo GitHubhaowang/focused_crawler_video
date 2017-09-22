@@ -1,4 +1,4 @@
-package com.hh.sprider.parser;
+package com.hh.spider.parser;
 
 import java.util.Map;
 

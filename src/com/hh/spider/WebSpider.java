@@ -1,12 +1,12 @@
-package com.hh.sprider;
+package com.hh.spider;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.hh.collection.URLCollection;
 import com.hh.collection.URLEntity;
-import com.hh.sprider.parser.HtmlParser;
-import com.hh.sprider.parser.impl.HtmlParserOfDYTT;
+import com.hh.spider.parser.HtmlParser;
+import com.hh.spider.parser.impl.HtmlParserOfDYTT;
 
 /**
  * 爬虫核心类
