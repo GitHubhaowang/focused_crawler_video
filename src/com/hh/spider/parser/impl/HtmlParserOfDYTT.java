@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.hh.collection.URLEntity;
-import com.hh.spider.parser.HtmlParser;
+import com.hh.spider.parser.AbstractHtmlParser;
 import com.hh.util.HttpClientUtil;
 
 /**
@@ -14,7 +14,7 @@ import com.hh.util.HttpClientUtil;
  * @author hh
  *
  */
-public class HtmlParserOfDYTT implements HtmlParser{
+public class HtmlParserOfDYTT extends AbstractHtmlParser {
 
 	@Override
 	public String getBody(Map<String, Object> map, String charaset, String url) {

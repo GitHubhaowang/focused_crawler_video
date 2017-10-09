@@ -6,7 +6,6 @@ import java.util.Map;
 import com.hh.collection.URLCollection;
 import com.hh.collection.URLEntity;
 import com.hh.spider.parser.HtmlParser;
-import com.hh.spider.parser.impl.HtmlParserOfDYTT;
 
 /**
  * 爬虫核心类
@@ -34,7 +33,7 @@ public class WebSpider extends Thread{
 		URLCollection urlC = URLCollection.getInstance();
 		while (!urlC.getUnVisitedEmpty()) {
 			URLEntity ue = urlC.removeUnVisited();
-			ue = hp.getDownUrl(ue);
+			ue = hp.getURLEntity(ue);
 			if (ue.getDownURL() == null || "".equals(ue.getDownURL())) {
 				// 用来防止一直循环下去
 				Integer count = map.get(ue);

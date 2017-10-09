@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.hh.collection.URLEntity;
-import com.hh.spider.parser.HtmlParser;
+import com.hh.spider.parser.AbstractHtmlParser;
 import com.hh.util.HttpClientUtil;
 
 /**
@@ -14,10 +14,10 @@ import com.hh.util.HttpClientUtil;
  * @author hh
  *
  */
-public class HtmlParserOf80s implements HtmlParser{
+public class HtmlParserOf80s extends AbstractHtmlParser {
 
 	@Override
-	public String getBody(Map<String, Object> map, String charset, String url) {
+	protected String getBody(Map<String, Object> map, String charset, String url) {
 		if (map == null || map.isEmpty()) {
 			return HttpClientUtil.getInstance().getSend(map, charset, url);
 		}
@@ -25,7 +25,7 @@ public class HtmlParserOf80s implements HtmlParser{
 	}
 
 	@Override
-	public String analysisUrl(String page, String name) {
+	protected String analysisUrl(String page, String name) {
 		Pattern pattern = Pattern.compile("<li>([\\s\\S]*)<a href=\"/movie/([0-9]*)\" target=\"_blank\">([\\s\\S]*?)<i class=\"fa fa-film\"></i>([\\s\\S]*?)[电影]([\\s\\S]*?)" + name + "([\\s\\S]*?)(.+?)([\\s\\S]*?)</a>");
 		Matcher matcher = pattern.matcher(page);
 		if (matcher.find()) {
@@ -35,7 +35,7 @@ public class HtmlParserOf80s implements HtmlParser{
 	}
 
 	@Override
-	public boolean isDownPage(String page) {
+	protected boolean isDownPage(String page) {
 		Pattern pattern = Pattern.compile("<title>(\\s)*?(.+?)高清mp4迅雷下载-80s手机电影</title>");
 		Matcher matcher = pattern.matcher(page);
 		if (matcher.find()) {
@@ -45,12 +45,14 @@ public class HtmlParserOf80s implements HtmlParser{
 	}
 
 	@Override
-	public URLEntity getDownUrl(URLEntity ue) {
+	protected URLEntity getDownUrl(URLEntity ue) {
 
 		Map<String, Object> map = null;
 		map = getStartMap(ue.getName());
 		
-		return getDownUrl(map, ue, "http://www.80s.tw/search", 1);
+		URLEntity returnUe = getDownUrl(map, ue, "http://www.80s.tw/search", 1);
+		
+		return returnUe;
 	}
 	
 	private URLEntity getDownUrl(Map<String, Object> map, URLEntity ue, String url,int level) {
@@ -79,7 +81,7 @@ public class HtmlParserOf80s implements HtmlParser{
 	}
 
 	@Override
-	public String getDownUrlFromPage(String page) {
+	protected String getDownUrlFromPage(String page) {
 		Pattern pattern = Pattern.compile("<a rel=\"nofollow\" href=\"(.+?)\" >");
 		Matcher matcher = pattern.matcher(page);
 		if (matcher.find()) {
@@ -98,19 +100,9 @@ public class HtmlParserOf80s implements HtmlParser{
 	}
 
 	@Override
-	public Map<String, Object> getStartMap(String name) {
+	protected Map<String, Object> getStartMap(String name) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword", name);
 		return map;
-	}
-	
-	
-	public static void main(String[] args) {
-		HtmlParser hp = new HtmlParserOf80s();
-		
-		URLEntity ue = new URLEntity();
-		ue.setName("使徒行者");
-		
-		System.out.println(hp.getDownUrl(ue));
 	}
 }
