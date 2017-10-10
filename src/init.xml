@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<init>
+	<spider>
+		<name>HtmlParserOf80s</name>
+		<class>com.hh.spider.parser.impl.HtmlParserOf80s</class>
+	</spider>
+	<spider>
+		<name>HtmlParserOfDYTT</name>
+		<class>com.hh.spider.parser.impl.HtmlParserOfDYTT</class>
+	</spider>
+	
+	<observer>
+		<name>SpiderLog</name>
+		<class>com.hh.util.SpiderLog</class>
+	</observer>
+	
+	<spider-observer>
+		<ref-spider>HtmlParserOf80s</ref-spider>
+		<ref-observer>SpiderLog</ref-observer>
+		<load-up>3</load-up>
+	</spider-observer>
+	
+	<spider-observer>
+		<ref-spider>HtmlParserOfDYTT</ref-spider>
+		<ref-observer>SpiderLog</ref-observer>
+		<load-up>3</load-up>
+	</spider-observer>
+</init>
