@@ -16,14 +16,8 @@ public class WebSpider extends Thread{
 	private HtmlParser hp;
 	Map<Object, Integer> map = new HashMap<Object, Integer>();	// 用来记录每个ue对象循环次数
 	
-	public WebSpider(Class<? extends HtmlParser> objClass) {
-		try {
-			hp = objClass.newInstance();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
+	public WebSpider(HtmlParser hp) {
+		this.hp = hp;
 	}
 	
 	/**

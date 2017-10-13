@@ -10,7 +10,7 @@ import java.util.Map;
  * @author hh
  * 2017-10-9 11:30:02
  */
-public class Observable {
+public class Observable implements Product {
 	private Map<Integer, List<Observer>> map = new HashMap<Integer, List<Observer>>();
 	
 	/**
